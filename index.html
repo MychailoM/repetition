@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* #box {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    } */
+
+    /*.block {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }*/
+
+    /* .dot {
+      width: 10px;
+      height: 10px;
+      background: red;
+      position: absolute;
+      border-radius: 50%;
+    } */
+
+    body {
+      font-family: Roboto, sans-serif;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 8px;
+      background-color: #fff;
+      list-style: none;
+    }
+    .btn {
+      position: relative;
+      display: inline-block;
+      border: none;
+      border-radius: 3px;
+      padding: 0 1.5em;
+      vertical-align: top;
+      margin: 4px;
+      font-size: 15px;
+      line-height: 2.8;
+      font-family: inherit;
+      color: #222;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+      text-decoration: none;
+      background-color: #fff;
+      overflow: hidden;
+      z-index: 0;
+      cursor: pointer;
+      box-shadow:
+        0 2px 1px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.3);
+      transition:
+        background-color 0.3s,
+        box-shadow 0.3s,
+        opacity 0.3s,
+        color 0.3s;
+    }
+    .btn:hover {
+      box-shadow:
+        0 2px 3px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .btn.active {
+      color: #fff;
+      background-color: #2196f3;
+    }
+
+    #box{   position: absolute; width: 50px; z-index: 0;    height: 50px;    background-color: red;}
+
+    *{position:  relative; z-index: 1;}
+  </style>
+  <body>
+    <!-- <input id="inp-one" type="text">
+        <input id="inp-two" type="text">
+        <button id="btn" type="button">Додати</button>
+
+        <ul id="list"></ul> -->
+    <!-- 
+    <ul id="ingredients"></ul> -->
+
+    <!-- <div id="counter">
+      <button type="button" data-action="decrement">-1</button>
+      <span id="value">0</span>
+      <button type="button" data-action="increment">+1</button>
+    </div> -->
+
+    <!-- 
+    <div style="width: 50px; height: 50px; background-color: aqua;" id="box"></div> -->
+
+    <!-- <input type="text" id="input">
+    <p id="message"></p>
+
+    <div id="box"></div> -->
+
+    <!-- <div class="block"></div> -->
+
+    <!-- <p class="info"></p> -->
+
+<!-- 
+    <ul class="nav js-nav">
+      <li><a href="#" class="btn">HTML</a></li>
+      <li><a href="#" class="btn">CSS</a></li>
+      <li><a href="#" class="btn">JavaScript</a></li>
+      <li><a href="#" class="btn">NPM</a></li>
+      <li><a href="#" class="btn">Babel</a></li>
+      <li><a href="#" class="btn">Webpack</a></li>
+      <li><a href="#" class="btn">React</a></li>
+      <li><a href="#" class="btn">Redux</a></li>
+      <li><a href="#" class="btn">NodeJS</a></li>
+    </ul> -->
+
+    <!-- <input type="text" class="val">
+    <button type="button" class="save">save</button> -->
+
+
+    <!-- Створити сторінку з формою реєстрації користувача. 
+    Зберігати дані про користувача (ім'я, email, пароль) в localStorage.  -->
+
+    <!-- <form id="form">
+      <input type="text" class="name">
+      <input type="email" class="email">
+      <input type="password" class="pass">
+      <button type="submit">submit</button>
+    </form> -->
+
+    <div id="box"></div>
+
+    <input type="text" id="input" placeholder="Введи елемент">
+    <button id="addBtn">Додати</button>
+
+    <ul id="list"></ul>
+
+
+    <input type="text" id="time">
+    <button type="button" id="start">start</button>
+    <p id="text"></p>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
