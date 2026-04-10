@@ -543,73 +543,201 @@
 // затримки в мілісекундах, наприклад 100мс, і передайте 
 // функцію, яка буде виконуватися при переміщенні мишкою
 
-import debounce from 'https://cdn.jsdelivr.net/npm/lodash.debounce@4.0.8/+esm';
+// import debounce from 'https://cdn.jsdelivr.net/npm/lodash.debounce@4.0.8/+esm';
 
-const item = document.getElementById('box');
+// const item = document.getElementById('box');
 
-const moveBox = debounce((e) => {
-  item.style.left = e.clientX + 'px';
-  item.style.top = e.clientY + 'px';
-}, 10);
+// const moveBox = debounce((e) => {
+//   item.style.left = e.clientX + 'px';
+//   item.style.top = e.clientY + 'px';
+// }, 10);
 
-document.addEventListener('mousemove', moveBox);
+// document.addEventListener('mousemove', moveBox);
 
 
-const input = document.getElementById('input');
-const addBtn = document.getElementById('addBtn');
-const list = document.getElementById('list');
+// const input = document.getElementById('input');
+// const addBtn = document.getElementById('addBtn');
+// const list = document.getElementById('list');
 
-const STORAGE_KEY = 'favorites';
+// const STORAGE_KEY = 'favorites';
 
-function getFavorites() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-}
+// function getFavorites() {
+//   return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+// }
 
-function saveFavorites(data) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-}
+// function saveFavorites(data) {
+//   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+// }
 
-function render() {
-  const items = getFavorites();
+// function render() {
+//   const items = getFavorites();
 
+//   list.innerHTML = '';
+
+//   items.forEach((item, index) => {
+//     const li = document.createElement('li');
+//     li.textContent = item;
+
+//     const btn = document.createElement('button');
+//     btn.textContent = 'X';
+//     btn.addEventListener('click', () => removeItem(index));
+
+//     li.appendChild(btn);
+//     list.appendChild(li);
+//   });
+// }
+
+// function removeItem(index) {
+//   const items = getFavorites();
+//   items.splice(index, 1);
+
+//   saveFavorites(items);
+//   render();
+// }
+
+// addBtn.addEventListener('click', () => {
+//   const value = input.value.trim();
+//   if (!value) return;
+
+//   const items = getFavorites();
+//   items.push(value);
+
+//   saveFavorites(items);
+//   render();
+
+//   input.value = '';
+// });
+
+// render();
+
+
+// start.addEventListener('click', () => {
+//   const delay = Number(time.value) * 1000;
+
+//   setTimeout(() => {
+//     text.textContent = `Після нажаття кнопки пройшло ${time.value} секунд`;
+//   }, delay);
+// });
+
+
+
+// Створити таймер, який буде починати відлік з 10 секунд та зменшувати час кожну мілісекунду. 
+// При досягненні 5 секунд, таймер повинен змінювати колір фону сторінки на червоний.
+
+// const timerBox = document.querySelector('.timer');
+
+// let timerStart = 10000;
+
+// const timer = setInterval(() => {
+//   timerStart -= 1;
+//   timerBox.textContent = timerStart/1000;
+//   if(timerStart === 5000){
+//     timerBox.style.backgroundColor = 'red';
+//   }
+
+//   if(timerStart === 0){
+//   clearInterval(timer);
+//   timerBox.textContent = 'Час вийшов';
+  
+// }
+// }, 1);
+
+
+
+// Реалізуйте годинник, який показує поточний час у форматі "години:хвилини:секунди".
+//  Оновлюйте годинник кожну секунду без використання вбудованих функцій для отримання поточного часу.
+
+// const clock = document.querySelector('.clock');
+
+// const updateTime = () => {
+//   const now = new Date();
+//   let hours = now.getHours();
+//   let minutes = now.getMinutes();
+//   let seconds = now.getSeconds();
+
+//   hours = hours.toString().padStart(2, "0");
+//   minutes = minutes.toString().padStart(2, "0");
+//   seconds = seconds.toString().padStart(2, "0");
+
+//   clock.textContent = `${hours}:${minutes}:${seconds}`;
+// };
+
+// setInterval(updateTime, 1000);
+
+
+
+// Напишіть функцію, яка обчислює скільки днів залишилося до 
+// наступного Дня народження на основі заданої дати народження.
+
+// function birthday(day, month){
+//   const now = new Date();
+//   const currentYear = now.getFullYear();
+
+//   let nextBirthday = new Date(currentYear, month - 1, day);
+//   if(nextBirthday < now){
+//     nextBirthday = new Date(currentYear + 1, month - 1, day);
+//   }
+
+//   const diferentTime = nextBirthday - now;
+//   const diferentDays = Math.ceil(diferentTime / (1000 * 3600 * 24 ));
+//   return diferentDays
+// }
+
+// console.log(birthday(5, 6))
+
+
+const input = document.querySelector('.value');
+const save = document.querySelector('.save');
+
+const list = document.querySelector('.list');
+
+
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+const saveToStorage = () => {
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+};
+
+const renderList = () => {
   list.innerHTML = '';
 
-  items.forEach((item, index) => {
+  favorites.forEach((item, index) => {
     const li = document.createElement('li');
     li.textContent = item;
 
-    const btn = document.createElement('button');
-    btn.textContent = 'X';
-    btn.addEventListener('click', () => removeItem(index));
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "x";
+    deleteBtn.onclick = () => removeItem(index);
 
-    li.appendChild(btn);
+    li.appendChild(deleteBtn);
     list.appendChild(li);
   });
 }
 
-function removeItem(index) {
-  const items = getFavorites();
-  items.splice(index, 1);
+renderList()
 
-  saveFavorites(items);
-  render();
-}
-
-addBtn.addEventListener('click', () => {
+const addItem = () => {
   const value = input.value.trim();
-  if (!value) return;
-
-  const items = getFavorites();
-  items.push(value);
-
-  saveFavorites(items);
-  render();
+  if(value === ''){return};
+  favorites.push(value);
+  saveToStorage()
+  renderList();
 
   input.value = '';
-});
+}
 
-render();
+function removeItem(index) {
+  favorites.splice(index, 1);
+  saveToStorage();
+  renderList();
+}
 
+save.addEventListener('click', addItem);
+
+
+const start = document.querySelector('#start');
+const time = document.querySelector('#time');
+const text = document.querySelector('#text');
 
 start.addEventListener('click', () => {
   const delay = Number(time.value) * 1000;
