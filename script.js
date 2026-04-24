@@ -686,63 +686,252 @@
 // console.log(birthday(5, 6))
 
 
-const input = document.querySelector('.value');
-const save = document.querySelector('.save');
+// const input = document.querySelector('.value');
+// const save = document.querySelector('.save');
 
-const list = document.querySelector('.list');
-
-
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-
-const saveToStorage = () => {
-  localStorage.setItem('favorites', JSON.stringify(favorites));
-};
-
-const renderList = () => {
-  list.innerHTML = '';
-
-  favorites.forEach((item, index) => {
-    const li = document.createElement('li');
-    li.textContent = item;
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = "x";
-    deleteBtn.onclick = () => removeItem(index);
-
-    li.appendChild(deleteBtn);
-    list.appendChild(li);
-  });
-}
-
-renderList()
-
-const addItem = () => {
-  const value = input.value.trim();
-  if(value === ''){return};
-  favorites.push(value);
-  saveToStorage()
-  renderList();
-
-  input.value = '';
-}
-
-function removeItem(index) {
-  favorites.splice(index, 1);
-  saveToStorage();
-  renderList();
-}
-
-save.addEventListener('click', addItem);
+// const list = document.querySelector('.list');
 
 
-const start = document.querySelector('#start');
-const time = document.querySelector('#time');
-const text = document.querySelector('#text');
+// let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-start.addEventListener('click', () => {
-  const delay = Number(time.value) * 1000;
+// const saveToStorage = () => {
+//   localStorage.setItem('favorites', JSON.stringify(favorites));
+// };
 
-  setTimeout(() => {
-    text.textContent = `Після нажаття кнопки пройшло ${time.value} секунд`;
-  }, delay);
+// const renderList = () => {
+//   list.innerHTML = '';
+
+//   favorites.forEach((item, index) => {
+//     const li = document.createElement('li');
+//     li.textContent = item;
+
+//     const deleteBtn = document.createElement('button');
+//     deleteBtn.textContent = "x";
+//     deleteBtn.onclick = () => removeItem(index);
+
+//     li.appendChild(deleteBtn);
+//     list.appendChild(li);
+//   });
+// }
+
+// renderList()
+
+// const addItem = () => {
+//   const value = input.value.trim();
+//   if(value === ''){return};
+//   favorites.push(value);
+//   saveToStorage()
+//   renderList();
+
+//   input.value = '';
+// }
+
+// function removeItem(index) {
+//   favorites.splice(index, 1);
+//   saveToStorage();
+//   renderList();
+// }
+
+// save.addEventListener('click', addItem);
+
+
+// const start = document.querySelector('#start');
+// const time = document.querySelector('#time');
+// const text = document.querySelector('#text');
+
+// start.addEventListener('click', () => {
+//   const delay = Number(time.value) * 1000;
+
+//   setTimeout(() => {
+//     text.textContent = `Після нажаття кнопки пройшло ${time.value} секунд`;
+//   }, delay);
+// });
+
+
+
+// Налаштування профілю користувача
+// Створити форму, де користувач може налаштувати свій “віртуальний профіль”, а всі зміни одразу відображаються на сторінці.
+// 1. Вимоги до форми:
+// Ім’я (text input)
+// Вік (number input)
+// Стать (radio buttons)
+// -Чоловіча
+// -Жіноча
+// -Інше
+// Інтереси (checkbox) (можна вибрати кілька)
+// -Спорт
+// -Музика
+// -Ігри
+// -Подорожі
+// Улюблений колір (color input)
+// -цей колір має змінювати фон профілю
+// Рівень досвіду (range input) (від 0 до 100) відображати значення у %
+// Мова інтерфейсу (select)
+// -Українська
+// -English
+// -Deutsch
+
+// 2. Завдання JavaScript:
+// При натисканні кнопки “Зберегти”:
+// зчитати всі значення з форми
+// вивести їх у блок “Профіль користувача”
+// Реалізувати:
+// -зміна фону блоку через color input
+// -оновлення значення range в реальному часі
+// - зібрати всі вибрані чекбокси в список
+// - визначити обраний radio
+
+
+// const nameInp = document.getElementById('name');
+// const ageInp = document.getElementById('age');
+// const color = document.getElementById('color');
+// const range = document.getElementById('range');
+// const rangeValue = document.getElementById('rangeValue');
+// const lang = document.getElementById('language');
+
+// const save = document.getElementById('saveBtn');
+// const profileOutput = document.getElementById('profileOutput');
+
+// range.addEventListener('input', () => {
+//   rangeValue.textContent = range.value+'%';
+// })
+
+// color.addEventListener('input', () => {
+//   const colorVal = color.value;
+//   profileOutput.style.backgroundColor = colorVal;  
+// })
+
+// save.addEventListener('click', () => {
+//   const name = nameInp.value;
+//   const age = ageInp.value;
+
+//   const gender = document.querySelector('input[name="gender"]:checked');
+//   const genderValue = gender ? gender.value:'Не обрано';
+
+//   const actives = document.querySelectorAll('input[type="checkbox"]:checked');
+//   const activesArr = [];
+//   actives.forEach(active => activesArr.push(active.value));
+
+//   const language = lang.value;
+
+//   if(name.trim() === ''){
+//     alert("Ви не ввели ім'я");
+//     return
+//   }
+
+//   if(age.trim() === ''){
+//     alert("Ви не вказали вік");
+//     return
+//   }
+
+//   if(!name || !age){
+//     alert("введіть ім'я та вік");
+//     return
+//   }
+
+//   profileOutput.innerHTML = `
+//   <p>Ім'я: ${name}</p>
+//   <p>Вік: ${age}</p>
+//   <p>Стать: ${genderValue}</p>
+//   <p>Хоббі:${activesArr.join(', ')}</p>
+//   <p>Мова: ${language}</p>
+//   <p>Рівень мови: ${range.value}</p> 
+//   `;
+
+//   localStorage.setItem('profile', JSON.stringify({
+//   name,
+//   age,
+//   genderValue,
+//   activesArr,
+//   language,
+//   range: range.value,
+//   color: color.value
+// }));
+
+// })
+
+// window.addEventListener('DOMContentLoaded', () => {
+//   const saved = JSON.parse(localStorage.getItem('profile'));
+//   if(!saved) return;
+
+//   nameInp.value = saved.name;
+//   ageInp.value = saved.age;
+//   lang.value = saved.language;
+//   range.value = saved.range;
+//   rangeValue.textContent = saved.range + '%';
+//   profileOutput.style.backgroundColor = saved.color;
+
+//   profileOutput.innerHTML = `
+//     <p>Ім'я: ${saved.name}</p>
+//     <p>Вік: ${saved.age}</p>
+//     <p>Стать: ${saved.genderValue}</p>
+//     <p>Хоббі: ${saved.activesArr.join(', ')}</p>
+//     <p>Мова: ${saved.language}</p>
+//     <p>Рівень мови: ${saved.range}%</p>
+//   `;
+// });
+
+
+
+
+
+
+// 3. Додаткові ускладнення:
+// Зберігати дані в localStorage, щоб після перезавантаження вони не зникали
+// Якщо користувач нічого не ввів — показати повідомлення про помилку
+// Додати кнопку “Скинути”
+
+
+
+
+
+// Завдання JavaScript:
+// При натисканні кнопки отримати:
+// - обрану дату
+// - назву завантаженого фото
+// - назву файлу
+// - чи відмічений чекбокс
+// Якщо чекбокс не обраний - показати помилку
+// Якщо все ок - вивести результат у блок:
+// Дата: 2026-05-01  
+// Фото: avatar.png  
+// Файл: resume.pdf  
+// Статус: Підтверджено 
+
+
+const dateInp = document.querySelector('.date');
+const imgInp = document.querySelector('.img');
+const fileInp = document.querySelector('.file');
+const checkInp = document.querySelector('.check');
+const saveBtn = document.querySelector('.save');
+const box = document.querySelector('.block')
+
+let checkState = false;
+let fileName = null;
+let imgName = null;
+
+fileInp.addEventListener('change', () => {
+  fileName = fileInp.files[0];   
 });
+
+imgInp.addEventListener('change', () => {
+  imgName = imgInp.files[0];
+});
+
+checkInp.addEventListener('change', () => {
+  if(checkInp.checked){
+    checkState = true;
+  } else {
+    alert('Погодьтесь з правилами');
+  }
+});
+
+saveBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  box.innerHTML = `
+  <p>Дата: ${dateInp.value}</p>
+  <p>Назва фото: ${imgName.name}</p>
+  <p>Назва файлу: ${fileName.name}</p>
+  `
+})
+

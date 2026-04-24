@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <style>
     /* #box {
@@ -163,13 +164,97 @@
       00:00:00
     </h2> -->
 
-    <input type="text" class="value">
+    <!-- <input type="text" class="value">
     <button class="save" type="button">save</button>
     <ul class="list"></ul>
 
     <input type="text" id="time">
     <button type="button" id="start">start</button>
-    <p id="text"></p>
+    <p id="text"></p> -->
+
+    <!-- <form id="profileForm">
+    <label>
+        Ім’я:
+        <input type="text" id="name">
+    </label>
+
+    <label>
+        Вік:
+        <input type="number" id="age">
+    </label>
+
+    <label>Стать:</label>
+    <label><input type="radio" name="gender" value="Чоловіча"> Чоловіча</label>
+    <label><input type="radio" name="gender" value="Жіноча"> Жіноча</label>
+    <label><input type="radio" name="gender" value="Інше"> Інше</label>
+
+    <label>Інтереси:</label>
+    <label><input type="checkbox" value="Спорт"> Спорт</label>
+    <label><input type="checkbox" value="Музика"> Музика</label>
+    <label><input type="checkbox" value="Ігри"> Ігри</label>
+    <label><input type="checkbox" value="Подорожі"> Подорожі</label>
+
+    <label>
+        Улюблений колір:
+        <input type="color" id="color">
+    </label>
+
+    <label>
+        Рівень досвіду:
+        <input type="range" id="range" min="0" max="100">
+        <span id="rangeValue">0%</span>
+    </label>
+
+    <label>
+        Мова:
+        <select id="language">
+            <option>Українська</option>
+            <option>English</option>
+            <option>Deutsch</option>
+        </select>
+    </label>
+
+    <br>
+    <button type="button" id="saveBtn">Зберегти</button>
+</form>
+
+<div class="profile" id="profileOutput">
+    Профіль
+</div> -->
+
+
+<!-- Створити невелику форму з такими полями:
+Дата події (input type="date")
+Фото профілю (input type="file", тільки зображення)
+Файл (наприклад, документ) (input type="file")
+Погоджуюсь з правилами (checkbox)
+Кнопка “Надіслати”-->
+
+<form class="form">
+  <input type="date" class="date" placeholder="Введіть поточну дату">
+  
+  <label>
+    Оберіть фото
+    <input class="img" type="file" accept=".jpg, .jpeg, .png">
+  </label>
+  
+  <label>
+    Оберіть файл
+    <input class="file" type="file">
+  </label>  
+  
+  <label>
+    Погоджуюсь з правилами
+    <input class="check" type="checkbox">
+  </label>  
+
+  <button class="save">save</button>
+</form>
+
+<div class="box"></div>
+
+
+<div class="block"></div>
 
     <script type="module" src="script.js"></script>
   </body>
