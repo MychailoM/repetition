@@ -955,11 +955,11 @@
 // .then(console.log)
 // .catch(console.error)
 
-// // Напишіть функцію raceTimeout,
-// // яка приймає Promise і таймаут (у мілісекундах)
-// // і повертає Promise, який вирішується, якщо початковий
-// // Promise вирішується до закінчення таймауту, або відхиляється,
-// // якщо таймаут закінчується перед вирішенням початкового Promise.
+// Напишіть функцію raceTimeout,
+// яка приймає Promise і таймаут (у мілісекундах)
+// і повертає Promise, який вирішується, якщо початковий
+// Promise вирішується до закінчення таймауту, або відхиляється,
+// якщо таймаут закінчується перед вирішенням початкового Promise.
 // const fetchDataPromise = fetch("https://dog.ceo/api/breeds/image/random");
 // const timeout = 5000;
 
@@ -982,43 +982,98 @@
 //   }); // Помилка "Timeout", якщо таймаут
 // // закінчився перед вирішенням початкового Promise
 
-
 // Напишіть функцію firstSuccessful, яка приймає масив промісів і повертає новий проміс:
 // - виконується (resolve) з результатом першого успішного промісу
 // - якщо всі проміси відхилені (reject) — повертає помилку "Всі проміси завершились з помилкою"
 
-function firstSuccessful(promises) {
-    return Promise.any(promises)
-        .catch(() => {
-            throw new Error('Всі проміси завершились з помилкою');
-        });
+// function firstSuccessful(promises) {
+//     return Promise.any(promises)
+//         .catch(() => {
+//             throw new Error('Всі проміси завершились з помилкою');
+//         });
+// }
+
+// const promise1 = Promise.reject('error 1');
+// const promise2 = Promise.resolve('Hello world');
+// const promise3 = new Promise(resolve => {
+//     setTimeout(() => {
+//         resolve('результат');
+//     }, 3000);
+// });
+
+// firstSuccessful([promise1, promise2, promise3])
+//     .then(result => {
+//         console.log('Результат:', result);
+//     })
+//     .catch(error => {
+//         console.error('Помилка:', error.message);
+//     });
+
+// const example1 = Promise.reject('err1');
+// const example2 = Promise.reject('err2');
+
+// firstSuccessful([example1, example2])
+//     .then(result => {
+//         console.log('Результат:', result);
+//     })
+//     .catch(error => {
+//         console.error('Помилка:', error.message);
+//     });
+
+// https://dog.ceo/api/breeds/image/random
+
+// Створіть просту HTML-сторінку з кнопкою та ділянкою для відображення результату запиту.
+
+// async function fetchApi (){
+//     // const breed = document.querySelector('.dog-breed').value.trim();
+//     // let url = 'https://dog.ceo/api/breeds/image/random';
+//     // if(breed !== ""){
+//     //     url = `https://dog.ceo/api/breed/${breed}/images/random`;
+//     // }
+//     // fetch(url)
+//     try{
+//         const response = await fetch('https://dog.ceo/api/breeds/image/random');
+//         const data = await response.json();
+//         const imageUrl = data.message
+//         const parts = imageUrl.split('/');
+//         const breedName = parts[4];
+//         document.querySelector('.dog-img').src=imageUrl;
+//         document.querySelector('.dog-name').textContent=breedName;
+//     }
+//     catch(error){
+//         document.querySelector('.dog-name').textContent='Error';
+//         console.error(error)
+//     }
+// }
+
+// const save = document.querySelector('.search-dog').addEventListener('click', fetchApi)
+
+function fetchWeather() {
+  const city = document.querySelector(".city").value.trim();
+  const apiKey = "5ec584e7cf36ca20d779b522aa3500d3";
+  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+  if (city === "") {
+    alert("ви не ввели назву міста");
+    return;
+  }
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => {
+      let cityWeather = `
+            <h2>${data.name}</h2>
+            <p>Температура: ${data.main.temp}°C</p>
+            <p>Погода: ${data.weather[0].description}</p>
+            <p>Швидкість вітру: ${data.wind.speed}m/s</p>
+            <p>Вологість: ${data.main.humidity}%</p>         
+        `;
+
+      const cityWeatherCard = document.querySelector(".weather-window");
+      cityWeatherCard.innerHTML = cityWeather;
+    })
+    .catch((error) => console.error(error));
 }
 
-const promise1 = Promise.reject('error 1');
-const promise2 = Promise.resolve('Hello world');
-const promise3 = new Promise(resolve => {
-    setTimeout(() => {
-        resolve('результат');
-    }, 3000);
-});
-
-firstSuccessful([promise1, promise2, promise3])
-    .then(result => {
-        console.log('Результат:', result);
-    })
-    .catch(error => {
-        console.error('Помилка:', error.message);
-    });
-
-
-
-const example1 = Promise.reject('err1');
-const example2 = Promise.reject('err2');
-
-firstSuccessful([example1, example2])
-    .then(result => {
-        console.log('Результат:', result);
-    })
-    .catch(error => {
-        console.error('Помилка:', error.message);
-    });
+document
+  .querySelector(".search-weather")
+  .addEventListener("click", fetchWeather);
