@@ -1048,32 +1048,146 @@
 
 // const save = document.querySelector('.search-dog').addEventListener('click', fetchApi)
 
-function fetchWeather() {
-  const city = document.querySelector(".city").value.trim();
-  const apiKey = "5ec584e7cf36ca20d779b522aa3500d3";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+// function fetchWeather() {
+//   const city = document.querySelector(".city").value.trim();
+//   const apiKey = "5ec584e7cf36ca20d779b522aa3500d3";
+//   let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
-  if (city === "") {
-    alert("ви не ввели назву міста");
-    return;
-  }
-  fetch(url)
+//   if (city === "") {
+//     alert("ви не ввели назву міста");
+//     return;
+//   }
+//   fetch(url)
+//     .then((res) => res.json())
+//     .then((data) => {
+//       let cityWeather = `
+//             <h2>${data.name}</h2>
+//             <p>Температура: ${data.main.temp}°C</p>
+//             <p>Погода: ${data.weather[0].description}</p>
+//             <p>Швидкість вітру: ${data.wind.speed}m/s</p>
+//             <p>Вологість: ${data.main.humidity}%</p>
+//         `;
+
+//       const cityWeatherCard = document.querySelector(".weather-window");
+//       cityWeatherCard.innerHTML = cityWeather;
+//     })
+//     .catch((error) => console.error(error));
+// }
+
+// document
+//   .querySelector(".search-weather")
+//   .addEventListener("click", fetchWeather);
+
+let categoryList = [];
+let productsList = [];
+let keyWord = "";
+
+function getCategories() {
+  const categoriesBox = document.querySelector(".categories-box");
+  fetch("https://dummyjson.com/products/category-list")
     .then((res) => res.json())
     .then((data) => {
-      let cityWeather = `
-            <h2>${data.name}</h2>
-            <p>Температура: ${data.main.temp}°C</p>
-            <p>Погода: ${data.weather[0].description}</p>
-            <p>Швидкість вітру: ${data.wind.speed}m/s</p>
-            <p>Вологість: ${data.main.humidity}%</p>         
-        `;
+      categoryList = data;
 
-      const cityWeatherCard = document.querySelector(".weather-window");
-      cityWeatherCard.innerHTML = cityWeather;
+      let categoryBtns = `
+    <div class="category-wrap">
+      ${categoryList.map((category) => `<button class="category-btn">${category}</button>`).join("")}
+    </div>
+  `;
+
+      categoriesBox.innerHTML = categoryBtns;
+
+      const categoryButtons = document.querySelectorAll(".category-btn");
+
+      categoryButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          keyWord = btn.textContent;
+          getProducts(keyWord)
+        });
+      });
+    });
+}
+getCategories();
+
+
+function getProducts (keyWord){
+  const productsBox = document.querySelector('.products-box');
+  const product = document.querySelector('.product');
+
+  fetch(`https://dummyjson.com/products/category/${keyWord}`)
+  .then(res => res.json())
+  .then(data => {
+    productsList = data.products;
+
+    let productBtns = `
+      <div class="product-wrap">
+      ${productsList.map((product) => `<button class="product-btn">${product.title}</button>`).join("")}
+    </div>
+    `
+    productsBox.innerHTML = productBtns;
+
+    const productBtn = document.querySelectorAll('.product-btn');
+    productBtn.forEach(btn => {
+      btn.addEventListener('click', () => {
+        fetch(`https://dummyjson.com/products/search?q=${btn.textContent}`)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+          let productHTML = `
+            <img src="${data.products[0].images[0]}" alt="product">
+            <h2>${data.products[0].title}</h2>
+            <h3>${data.products[0].brand}</h3>
+            <h2>${data.products[0].price}$</h2>`
+          product.innerHTML = productHTML
+        });
+      })
     })
-    .catch((error) => console.error(error));
+  })
 }
 
-document
-  .querySelector(".search-weather")
-  .addEventListener("click", fetchWeather);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// https://dummyjson.com/recipes/search?q=Margherita
+// https://dummyjson.com/recipes
+
+// function getRecipes() {
+//   const keyWord = document.querySelector(".key-word").value;
+//   let recipes = [];
+
+//   if (keyWord.trim() === "") {
+//     fetch("https://dummyjson.com/recipes")
+//       .then((res) => res.json())
+//       .then((data) => (recipes = data.recipes));
+//   } else {
+//     fetch(`https://dummyjson.com/recipes/search?q=${keyWord}`)
+//       .then((res) => res.json())
+//       .then((data) => {
+//         let recipe = `
+//       <img src="" alt="recipe">
+//       <h2></h2>
+//       <p></p>
+//       <p></p>
+//       <p></p>
+//       <p></p>
+//       `;
+//       });
+//   }
+// }
+
+// getRecipes();
